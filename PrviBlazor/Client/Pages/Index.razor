@@ -1,0 +1,45 @@
+﻿@page "/nestonesto"
+
+<Counter/>
+@{ 
+	int bla = 5;
+	bla++;
+}
+
+<h1>Hello, world! Vrednost= @bla Drugo nesto @Nesto</h1>
+
+@{ 
+	bla *= 2;
+}
+
+<p>@bla</p>
+
+<ul>
+	@foreach (string s in Lista)
+	{
+		<li>@s</li>
+	}
+</ul>
+<Counter/>
+<EditForm Model="EditString" OnSubmit="Foo">
+	<InputText @bind-Value="EditString.Nesto"/>
+	<button type="submit">Unos</button>
+</EditForm>
+<Counter/>
+@code
+{
+	public int Nesto { get; set; }
+	public Bla EditString { get; set; } = new Bla();
+	private List<string> Lista { get; set; } = new List<string>();
+
+	private void Foo()
+	{
+		Lista.Add(EditString.Nesto);
+		EditString = new Bla();
+	}
+
+	public class Bla
+	{
+		public string Nesto;
+	}
+}
